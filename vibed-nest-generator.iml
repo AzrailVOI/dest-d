@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="DLANGUAGE_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="vibe-d-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:crypto-0.9.8" level="project" />
+    <orderEntry type="library" name="mir-linux-kernel-1.0.1" level="project" />
+    <orderEntry type="library" name="vibe-core-2.13.3" level="project" />
+    <orderEntry type="library" name="eventcore-0.9.38" level="project" />
+    <orderEntry type="library" name="during-0.3.0" level="project" />
+    <orderEntry type="library" name="silly-1.1.1" level="project" />
+    <orderEntry type="library" name="taggedalgebraic-1.0.1" level="project" />
+    <orderEntry type="library" name="vibe-container-1.7.1" level="project" />
+    <orderEntry type="library" name="stdx-allocator-2.77.5" level="project" />
+    <orderEntry type="library" name="vibe-d:data-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:utils-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:http-0.9.8" level="project" />
+    <orderEntry type="library" name="diet-ng-1.8.4" level="project" />
+    <orderEntry type="library" name="vibe-d:inet-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:stream-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:textfilter-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:tls-0.9.8" level="project" />
+    <orderEntry type="library" name="openssl-3.4.0" level="project" />
+    <orderEntry type="library" name="vibe-d:mail-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:mongodb-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:redis-0.9.8" level="project" />
+    <orderEntry type="library" name="vibe-d:web-0.9.8" level="project" />
+  </component>
+</module>

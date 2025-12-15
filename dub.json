@@ -1,0 +1,21 @@
+{
+    "authors": [
+        "AzrailVOI"
+    ],
+    "description": "Dest.d – фреймворк и CLI-генератор для D проектов",
+    "license": "MIT",
+    "name": "dest-d",
+    "targetName": "dest",
+    "dependencies": {
+        "vibe-d": "~0.9.0"
+    },
+    "targetType": "executable",
+    "sourceFiles": [
+        "source/app.d",
+        "source/utils/*.d",
+        "source/generators/*.d",
+        "source/templates/*.d"
+    ],
+    "importPaths": ["source"],
+    "excludedSourceFiles": ["source/dest/**", "source/examples/**"]
+}

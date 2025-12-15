@@ -1,0 +1,39 @@
+{
+    "name": "dest-d",
+    "description": "Dest.d - Modern web framework for D language",
+    "authors": ["AzrailVOI"],
+    "license": "MIT",
+    "homepage": "https://github.com/yourusername/dest-d",
+    
+    "targetType": "library",
+    "targetPath": "lib",
+    
+    "dependencies": {
+        "vibe-d": "~>0.9.8"
+    },
+    
+    "sourcePaths": ["source/dest"],
+    "importPaths": ["source"],
+    
+    "versions": ["VibeCustomMain"],
+    
+    "configurations": [
+        {
+            "name": "library",
+            "targetType": "library"
+        }
+    ],
+    
+    "subPackages": [
+        {
+            "name": "examples",
+            "targetType": "executable",
+            "sourcePaths": ["source/examples"],
+            "importPaths": ["source"],
+            "dependencies": {
+                "dest-d": "*"
+            }
+        }
+    ]
+}
+
