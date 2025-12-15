@@ -7,7 +7,7 @@
     "name": "dest-d",
     "targetName": "dest",
     "dependencies": {
-        "vibe-d": "~0.9.8"
+        "vibe-d": "~>0.10.2"
     },
     "targetType": "executable",
     "sourceFiles": [

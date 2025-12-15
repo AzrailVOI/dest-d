@@ -9,7 +9,7 @@
     "targetPath": "lib",
     
     "dependencies": {
-        "vibe-d": "~>0.9.8"
+        "vibe-d": "~>0.10.2"
     },
     
     "sourcePaths": ["source/dest"],
