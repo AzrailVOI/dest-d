@@ -66,12 +66,13 @@ void initializeProject(string targetDir = null)
     writeln();
     
     // Скачиваем зависимости
+    writeln();
     writeln("Скачивание зависимостей...");
     string originalDir = getcwd();
     try
     {
         chdir(projectDir);
-        auto result = executeShell("dub fetch");
+        auto result = executeShell("dub fetch 2>&1");
         if (result.status == 0)
         {
             writeln("✓ Зависимости успешно скачаны");
@@ -79,6 +80,10 @@ void initializeProject(string targetDir = null)
         else
         {
             writeln("⚠ Не удалось скачать зависимости автоматически");
+            if (result.output.length > 0)
+            {
+                writeln("  Вывод:", result.output);
+            }
             writeln("  Выполните 'dub fetch' вручную в директории проекта");
         }
     }
