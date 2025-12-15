@@ -22,7 +22,6 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
 	],
 	"license": "%s",
 	"dependencies": {
-		"vibe-d": "~>0.9.8",
 		"dest-d": "~>1.0.0"
 	},
 	"versions": ["VibeDefaultMain"]
