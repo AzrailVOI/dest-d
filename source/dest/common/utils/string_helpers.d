@@ -1,5 +1,8 @@
 module dest.common.utils.string_helpers;
 
+import std.algorithm : startsWith, endsWith, countUntil;
+import std.string : indexOf, lastIndexOf;
+
 /// Обрезает строку до указанной длины
 string truncate(string str, int maxLength, string suffix = "...")
 {
@@ -47,16 +50,17 @@ string[] split(string str, string delimiter)
     string[] result;
     size_t start = 0;
     
-    while (true)
+    while (start < str.length)
     {
-        size_t pos = str.indexOf(delimiter, start);
+        int pos = cast(int)str.indexOf(delimiter, cast(int)start);
         if (pos == -1)
         {
-            result ~= str[start..$];
+            if (start < str.length)
+                result ~= str[start..$];
             break;
         }
-        result ~= str[start..pos];
-        start = pos + delimiter.length;
+        result ~= str[start..cast(size_t)pos];
+        start = cast(size_t)(pos + delimiter.length);
     }
     
     return result;

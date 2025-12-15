@@ -2,20 +2,25 @@
     "authors": [
         "AzrailVOI"
     ],
-    "description": "Dest.d – фреймворк и CLI-генератор для D проектов",
+    "description": "Dest.d – Modern web framework for D language",
     "license": "MIT",
     "name": "dest-d",
-    "targetName": "dest",
     "dependencies": {
         "vibe-d": "~>0.10.2"
     },
-    "targetType": "executable",
-    "sourceFiles": [
-        "source/app.d",
-        "source/utils/*.d",
-        "source/generators/*.d",
-        "source/templates/*.d"
-    ],
+    "sourcePaths": ["source"],
     "importPaths": ["source"],
-    "excludedSourceFiles": ["source/dest/**", "source/examples/**"]
+    "versions": ["VibeCustomMain"],
+    "configurations": [
+        {
+            "name": "library",
+            "targetType": "library"
+        },
+        {
+            "name": "executable",
+            "targetName": "dest",
+            "targetType": "executable",
+            "excludedSourceFiles": ["source/examples/**"]
+        }
+    ]
 }

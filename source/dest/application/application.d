@@ -68,8 +68,8 @@ class DestApplication
         
         ServerConfigurator.printStartupInfo(
             config,
-            moduleManager.getModuleNames().length,
-            getGlobalContainer().getProviderNames().length
+            cast(int)moduleManager.getModuleNames().length,
+            cast(int)getGlobalContainer().getProviderNames().length
         );
         
         listenHTTP(serverSettings, router);

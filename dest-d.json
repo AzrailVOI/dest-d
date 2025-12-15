@@ -12,7 +12,7 @@
         "vibe-d": "~>0.10.2"
     },
     
-    "sourcePaths": ["source/dest"],
+    "sourcePaths": ["source"],
     "importPaths": ["source"],
     
     "versions": ["VibeCustomMain"],

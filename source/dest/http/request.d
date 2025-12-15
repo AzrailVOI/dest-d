@@ -1,5 +1,6 @@
 module dest.http.request;
 
+import std.conv : to;
 import vibe.vibe;
 
 /// Высокоуровневая абстракция HTTP запроса
@@ -66,19 +67,19 @@ class Request
     /// HTTP метод
     string method()
     {
-        return _req.method.toString();
+        return to!string(_req.method);
     }
     
     /// URL запроса
     string url()
     {
-        return _req.requestURL.toString();
+        return _req.requestURL;
     }
     
     /// IP адрес клиента
     string ip()
     {
-        return _req.remoteAddress.toString();
+        return _req.clientAddress.toString();
     }
     
     /// Получить внутренний объект запроса (для расширенного использования)

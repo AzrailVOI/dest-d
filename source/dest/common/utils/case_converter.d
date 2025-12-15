@@ -1,5 +1,8 @@
 module dest.common.utils.case_converter;
 
+import std.uni : toLower, toUpper;
+import std.conv : to;
+
 /// Преобразует строку в camelCase
 string toCamelCase(string input)
 {

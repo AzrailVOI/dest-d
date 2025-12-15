@@ -22,21 +22,20 @@ class AppModule : DestModule
         metadata.imports = ["UserModule"];
     }
     
-    override void registerRoutes(URLRouter router)
+    override void registerRoutes(Router router)
     {
         // Регистрируем маршруты импортированных модулей
         userModule.registerRoutes(router);
         
         // Корневой маршрут
-        router.get("/", (HTTPServerRequest req, HTTPServerResponse res) {
-            res.headers["Content-Type"] = "application/json; charset=UTF-8";
+        router.get("/", (Request req, Response res) {
             Json response = Json.emptyObject;
             response["message"] = "Welcome to Dest.d API";
             response["version"] = DESTD_VERSION;
             response["endpoints"] = Json.emptyArray;
             response["endpoints"] ~= "/health";
             response["endpoints"] ~= "/users";
-            res.writeBody(response.toString());
+            res.json(response);
         });
         
         logInfo("✓ AppModule routes registered");

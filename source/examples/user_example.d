@@ -15,51 +15,45 @@ class UserController
     }
     
     @Get("")
-    void findAll(HTTPServerRequest req, HTTPServerResponse res)
+    void findAll(Request req, Response res)
     {
         auto users = userService.findAll();
-        res.headers["Content-Type"] = "application/json; charset=UTF-8";
-        res.writeBody(users);
+        res.json(users);
     }
     
     @Get("/:id")
-    void findOne(HTTPServerRequest req, HTTPServerResponse res)
+    void findOne(Request req, Response res)
     {
-        auto id = req.params["id"];
+        auto id = req["id"];
         auto user = userService.findOne(id);
-        res.headers["Content-Type"] = "application/json; charset=UTF-8";
-        res.writeBody(user);
+        res.json(user);
     }
     
     @Post("")
     @HttpCode(201)
-    void create(HTTPServerRequest req, HTTPServerResponse res)
+    void create(Request req, Response res)
     {
-        auto body = req.json;
+        auto body = req.getBody();
         auto user = userService.create(body);
-        res.statusCode = 201;
-        res.headers["Content-Type"] = "application/json; charset=UTF-8";
-        res.writeBody(user);
+        res.status(201).json(user);
     }
     
     @Put("/:id")
-    void update(HTTPServerRequest req, HTTPServerResponse res)
+    void update(Request req, Response res)
     {
-        auto id = req.params["id"];
-        auto body = req.json;
+        auto id = req["id"];
+        auto body = req.getBody();
         auto user = userService.update(id, body);
-        res.headers["Content-Type"] = "application/json; charset=UTF-8";
-        res.writeBody(user);
+        res.json(user);
     }
     
     @Delete("/:id")
     @HttpCode(204)
-    void remove(HTTPServerRequest req, HTTPServerResponse res)
+    void remove(Request req, Response res)
     {
-        auto id = req.params["id"];
+        auto id = req["id"];
         userService.remove(id);
-        res.statusCode = 204;
-        res.writeVoidBody();
+        res.status(204).end();
     }
 }
 
@@ -67,37 +61,37 @@ class UserController
 @Injectable
 class UserService
 {
-    string findAll()
+    Json findAll()
     {
         Json response = Json.emptyArray;
         response ~= Json(["id": Json(1), "name": Json("John Doe"), "email": Json("john@example.com")]);
         response ~= Json(["id": Json(2), "name": Json("Jane Smith"), "email": Json("jane@example.com")]);
-        return response.toString();
+        return response;
     }
     
-    string findOne(string id)
+    Json findOne(string id)
     {
         Json response = Json.emptyObject;
         response["id"] = id;
         response["name"] = "User " ~ id;
         response["email"] = "user" ~ id ~ "@example.com";
-        return response.toString();
+        return response;
     }
     
-    string create(Json data)
+    Json create(Json data)
     {
         Json response = data.clone();
         response["id"] = 3;
         response["createdAt"] = Clock.currTime.toISOExtString();
-        return response.toString();
+        return response;
     }
     
-    string update(string id, Json data)
+    Json update(string id, Json data)
     {
         Json response = data.clone();
         response["id"] = id;
         response["updatedAt"] = Clock.currTime.toISOExtString();
-        return response.toString();
+        return response;
     }
     
     void remove(string id)
@@ -131,43 +125,10 @@ class UserModule : DestModule
         metadata.exports = ["UserService"];
     }
     
-    override void registerRoutes(URLRouter router)
+    override void registerRoutes(Router router)
     {
-        auto meta = extractControllerMetadata!UserController();
-        
-        // Регистрируем маршруты из метаданных
-        foreach (route; meta.routes)
-        {
-            string fullPath = meta.basePath ~ route.path;
-            
-            switch (route.method)
-            {
-                case "GET":
-                    if (route.handler == "findAll")
-                        router.get(fullPath, &userController.findAll);
-                    else if (route.handler == "findOne")
-                        router.get(fullPath, &userController.findOne);
-                    break;
-                    
-                case "POST":
-                    if (route.handler == "create")
-                        router.post(fullPath, &userController.create);
-                    break;
-                    
-                case "PUT":
-                    if (route.handler == "update")
-                        router.put(fullPath, &userController.update);
-                    break;
-                    
-                case "DELETE":
-                    if (route.handler == "remove")
-                        router.delete_(fullPath, &userController.remove);
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
+        // Регистрируем контроллер через абстракцию Router
+        router.registerController(userController);
         
         logInfo("✓ UserModule routes registered");
     }

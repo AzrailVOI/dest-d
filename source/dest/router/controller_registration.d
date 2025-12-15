@@ -43,9 +43,8 @@ class ControllerRegistrator
     
     private static void delegate(Request, Response) getHandler(T, string methodName)(T controller)
     {
-        alias MemberType = typeof(__traits(getMember, T, methodName));
-        static assert(is(MemberType == function), "Method must be a function");
-        
+        // Создаем делегат, вызывая метод контроллера
+        // Метод должен иметь сигнатуру void method(Request, Response)
         return (Request req, Response res) {
             __traits(getMember, controller, methodName)(req, res);
         };

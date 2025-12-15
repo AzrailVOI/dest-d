@@ -3,6 +3,7 @@ module dest.application.routes;
 import vibe.vibe;
 import dest.application.config;
 import dest.router;
+import dest.module_system;
 
 /// Настройка маршрутов
 class RouteConfigurator
