@@ -1,6 +1,6 @@
 module dest.common.validators.pattern;
 
-import dest.common.validators.interface;
+import dest.common.validators.ivalidator;
 
 /// Валидатор для регулярного выражения
 class PatternValidator : IValidator

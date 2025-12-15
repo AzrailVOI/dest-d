@@ -1,6 +1,6 @@
 module dest.common.validators.required;
 
-import dest.common.validators.interface;
+import dest.common.validators.ivalidator;
 import std.format;
 
 /// Валидатор для обязательных полей

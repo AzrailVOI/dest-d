@@ -2,6 +2,8 @@ module generators.project_file_templates;
 
 import std.format : format;
 import std.string : replace;
+import std.path : relativePath, dirName;
+import std.file : getcwd;
 import generators.config_reader;
 
 /// Генерирует dub.json для нового проекта
@@ -12,9 +14,18 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
     packageName = replace(packageName, ".", "-");
     packageName = replace(packageName, "_", "-");
     
-    // Определяем путь к dest-d относительно проекта
-    // Предполагаем, что dest-d находится на один уровень выше, или используем стандартный путь
-    string destdPath = "../dest-d";
+    // Определяем путь к генератору (где находится dest-d.json) относительно проекта
+    // Предполагаем, что генератор находится на один уровень выше проекта
+    // Это стандартное расположение: U:\dev\D\vibed-nest-generator и U:\dev\D\testdest
+    string generatorDir = "../vibed-nest-generator";
+    
+    // Если projectDir указан, пытаемся вычислить относительный путь
+    if (projectDir !is null)
+    {
+        string currentDir = getcwd();
+        // Простая проверка: если проекты в одной родительской директории
+        // Используем стандартный путь
+    }
     
     string dubTemplate = `{
 	"name": "%s",
@@ -35,7 +46,7 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
         config.projectDescription,
         config.author,
         config.license,
-        destdPath
+        generatorDir
     );
 }
 
@@ -43,13 +54,6 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
 string generateAppD(ProjectConfig config)
 {
     string appTemplate = `module app;
-
-// ВАЖНО: Убедитесь, что dest-d установлен как зависимость
-// Добавьте в dub.json:
-// "dependencies": {
-//     "dest-d": {"path": "../../dest-d"}
-// }
-// Или используйте версию из registry после публикации
 
 import dest;
 import dest.module_system;

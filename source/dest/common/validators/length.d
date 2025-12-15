@@ -1,6 +1,6 @@
 module dest.common.validators.length;
 
-import dest.common.validators.interface;
+import dest.common.validators.ivalidator;
 import std.format;
 
 /// Валидатор для минимальной длины

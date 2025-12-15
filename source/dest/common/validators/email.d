@@ -1,6 +1,6 @@
 module dest.common.validators.email;
 
-import dest.common.validators.interface;
+import dest.common.validators.ivalidator;
 
 /// Валидатор для email
 class EmailValidator : IValidator
