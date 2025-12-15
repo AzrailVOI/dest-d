@@ -14,19 +14,6 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
     packageName = replace(packageName, ".", "-");
     packageName = replace(packageName, "_", "-");
     
-    // Определяем путь к генератору (где находится dest-d.json) относительно проекта
-    // Предполагаем, что генератор находится на один уровень выше проекта
-    // Это стандартное расположение: U:\dev\D\vibed-nest-generator и U:\dev\D\testdest
-    string generatorDir = "../vibed-nest-generator";
-    
-    // Если projectDir указан, пытаемся вычислить относительный путь
-    if (projectDir !is null)
-    {
-        string currentDir = getcwd();
-        // Простая проверка: если проекты в одной родительской директории
-        // Используем стандартный путь
-    }
-    
     string dubTemplate = `{
 	"name": "%s",
 	"description": "%s",
@@ -36,7 +23,7 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
 	"license": "%s",
 	"dependencies": {
 		"vibe-d": "~>0.9.0",
-		"dest-d": {"path": "%s"}
+		"dest-d": "~>1.0.0"
 	},
 	"versions": ["VibeDefaultMain"]
 }`;
@@ -45,8 +32,7 @@ string generateDubJson(ProjectConfig config, string projectDir = null)
         packageName,
         config.projectDescription,
         config.author,
-        config.license,
-        generatorDir
+        config.license
     );
 }
 

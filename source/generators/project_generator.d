@@ -5,6 +5,7 @@ import std.file;
 import std.path : buildPath;
 import std.array : array;
 import std.range : repeat;
+import std.process : executeShell;
 import generators.config_reader;
 import generators.project_file_templates;
 
@@ -63,13 +64,42 @@ void initializeProject(string targetDir = null)
     writeln("Проект успешно создан!");
     writeln('='.repeat(60).array);
     writeln();
+    
+    // Скачиваем зависимости
+    writeln("Скачивание зависимостей...");
+    string originalDir = getcwd();
+    try
+    {
+        chdir(projectDir);
+        auto result = executeShell("dub fetch");
+        if (result.status == 0)
+        {
+            writeln("✓ Зависимости успешно скачаны");
+        }
+        else
+        {
+            writeln("⚠ Не удалось скачать зависимости автоматически");
+            writeln("  Выполните 'dub fetch' вручную в директории проекта");
+        }
+    }
+    catch (Exception e)
+    {
+        writeln("⚠ Ошибка при скачивании зависимостей: ", e.msg);
+        writeln("  Выполните 'dub fetch' вручную в директории проекта");
+    }
+    finally
+    {
+        chdir(originalDir);
+    }
+    
+    writeln();
     writeln("Следующие шаги:");
     writeln("  1. cd ", projectDir);
     writeln("  2. dub build          # Собрать проект");
     writeln("  3. dub run            # Запустить сервер");
     writeln();
     writeln("Для добавления модулей используйте:");
-    writeln("  generator <module_name> [crud|empty]");
+    writeln("  dest module <module_name> [crud|empty]");
     writeln();
 }
 
